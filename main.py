@@ -1,10 +1,10 @@
 from rpg_classes.player import Player
-from rpg_classes.archer import Archer
+from rpg_classes.classes import Archer
 from game import *
 
 
 def main():
-    print("+------------- Welcome to Midare -------------+")
+    print("\n\n+------------- Welcome to Midare -------------+")
     print("|             Character Creation:             |")
     print("|                                             |")   
     print("|        1.  Create your character            |")
@@ -12,14 +12,12 @@ def main():
     print("+---------------------------------------------+")
 
     handle_input = int(input("What's your choice? "))
-    match handle_input:
+    match handle_input: 
        case 1:
-          print("\nCreating new character:")
           create_player()
-          print("\nCharacter created!")
           start_game()
        case 2:
-            print("Fodase")
+            exit()
        case _:
             print("Por favor, digite uma opção válida.")
 
