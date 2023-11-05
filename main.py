@@ -1,17 +1,26 @@
-from rpg_classes.player import Player 
-from rpg_classes.archer import Archer 
+from rpg_classes.player import Player
+from rpg_classes.archer import Archer
+from game import *
+
 
 def main():
-   print("+------------- Welcome to Midare -------------+")
-   print("|        1.  Create your character            |")
-   print("|        2.  Choose the difficulty            |")
-   print("|        3.  Exit the game                    |")
-   print("+---------------------------------------------+")
+    print("+------------- Welcome to Midare -------------+")
+    print("|             Character Creation:             |")
+    print("|                                             |")   
+    print("|        1.  Create your character            |")
+    print("|        2.  Exit the game                    |")
+    print("+---------------------------------------------+")
 
-   new_player = Player("Isa", "Humana", Archer())
-   print("\n" + new_player.name)
-   print(new_player.race)
-   print(f"A sua classe é: {new_player.get_class().class_type}\nSeu HP é: {new_player.get_class().health}\nE seu nível é {new_player.get_class().level} ")
-
+    handle_input = int(input("What's your choice? "))
+    match handle_input:
+       case 1:
+          print("\nCreating new character:")
+          create_player()
+          print("\nCharacter created!")
+          start_game()
+       case 2:
+            print("Fodase")
+       case _:
+            print("Por favor, digite uma opção válida.")
 
 main()
