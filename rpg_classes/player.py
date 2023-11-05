@@ -1,13 +1,12 @@
 class Player:
-   def __init__(self, name, class_chosen, race):
-      self.__name = name
-      self.__class_chosen = class_chosen
-      self.__race = race
-      
-   def get_name(self):
-      return self.__name
+   def __init__(self, name, race, class_type):
+      self.name = name
+      self.__class_chosen = class_type
+      self.race = race
    
-   def set_name(self, name):
-      self.__name = name
-      
+   def update_name(self, new_name):
+      self.name = new_name
+   
+   def get_class(self):
+      return self.__class_chosen
    
