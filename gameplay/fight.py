@@ -37,31 +37,33 @@ def monster_fight(hero, enemy_type):
     monster_damage = enemy_class.damage
 
     # Attack Menu
-    print(f"\n{enemy.race} {enemy.name} - Round: {round_count}    ")
-    print("                               ")
-    print("     1. Attack                ")
-    print("     2. Special Attack        ")
-    print("     3. Run                   ")
+    print(f"\n| {enemy.race} {enemy.name} - Round: {round_count} |")
+    print(" ________________________________")
+    print(" |                              |")
+    print(" |     1. Attack                |")
+    print(" |     2. Special Attack        |")
+    print(" |     3. Run                   |")
+    print(" |______________________________|")
     
     while True:
         try:
             move = int(input("\nWhat you gonna do? "))
             match move:
                 case 1:
-                    print("\nYou choose to use a normal attack:")
-                    print("--------------------------------------")
+                    print("\n\nYou use a normal attack:")
                     if(enemy_class.take_damage(player_damage) == 1):
-                        print(f"{enemy.name} takes {enemy_class.take_damage(player_damage)} point of damage.")
+                        print(f"-> {enemy.name} takes {enemy_class.take_damage(player_damage)} point of damage.")
                     else:
-                        print(f"{enemy.name} takes {enemy_class.take_damage(player_damage)} points of damage.")
+                        print(f"-> {enemy.name} takes {enemy_class.take_damage(player_damage)} points of damage.")
           
+                    print(f"\n{enemy.name} attacks you:")
                     if enemy_class.health > 0:
                         if(player_class.take_damage(monster_damage) == 1):
-                            print(f"You take {player_class.take_damage(monster_damage)} point of damage.")
+                            print(f"-> You take {player_class.take_damage(monster_damage)} point of damage.")
                         else:
-                            print(f"You take {player_class.take_damage(monster_damage)} points of damage.")
-                        
-                    print(f"\n| Monster HP: {enemy_class.death_check()}")
+                            print(f"-> You take {player_class.take_damage(monster_damage)} points of damage.")
+                    
+                    print(f"\n| {enemy.name} HP: {enemy_class.death_check()}")
                     print(f"| Your HP: {player_class.death_check()}")
                     # time.sleep(2)
 
@@ -114,7 +116,7 @@ def gold_drop(enemy_type):
 
 def xp_drop(enemy_type):
     if enemy_type.race == "Dark Elf":
-        return enemy_type.drop_xp(1, 4)
+        return enemy_type.drop_xp(2, 4)
     elif enemy_type.race == "Demon":
         return enemy_type.drop_xp(8, 14)
     else:
