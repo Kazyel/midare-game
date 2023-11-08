@@ -5,6 +5,7 @@ class ClassType:
         self.health = health
         self.damage = base_damage
         self.armor = base_armor
+        self.__base_health = health
     
     def __level_up(self):
         self.level += 1
@@ -33,8 +34,8 @@ class ClassType:
             return "Dead"
         return self.health
 
-    def reset_hp(self, health):
-        self.health = health
+    def reset_hp(self):
+        self.health = self.__base_health
 
 
 class Archer(ClassType):
