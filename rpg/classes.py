@@ -21,7 +21,7 @@ class ClassType:
             return damage_taken
         return 0
         
-    def check_death(self):
+    def death_check(self):
         if self.health <= 0:
             return "Dead"
         return self.health
