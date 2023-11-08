@@ -7,3 +7,8 @@ Midare is a simple CLI game, a RPG based in Python. The idea of the project star
 - The Shop, Items, Buffs
 - Code Refactoring and organization
 - Error Handlers 
+
+### Running the game:
+First, you gonna need Python 3.10+ installed on your computer.<br>
+
+Then, just clone the repository and digit in the CMD:  <code>python main.py</code> 
