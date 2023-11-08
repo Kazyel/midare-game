@@ -1,4 +1,4 @@
-from gameplay.game import create_hero, lobby
+from gameplay.game import create_hero, city
 import time
 
 
@@ -15,7 +15,7 @@ def main():
     match handle_input:
         case 1:
             create_hero()
-            lobby()
+            city()
         case 2:
             pass
         case 3:
