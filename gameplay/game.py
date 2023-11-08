@@ -17,19 +17,18 @@ def create_hero():
         print(f"Class: {hero.class_type.class_name}")
         print("\nStarting game...")
 
-    print("\n\n    Creating a new hero:")
-    print("+--------------------------+")
-    name = input("\n Enter your name: ")
-    race = input(" Enter your race: ")
+    print("\n\n        CREATING A NEW HERO")
+    print("   +---------------------------+")
+    name = input("        Enter your name: ")
+    race = input("        Enter your race: ")
 
-    print("\n+--------------------------+")
-    print("|    Choose your class:    |")
-    print("|                          |")
-    print("|      1. Warrior          |")
-    print("|      2. Archer           |")
-    print("|      3. Mage             |")
-    print("|                          |")
-    print("+--------------------------+")
+    print("\n+------- CHOOSE YOUR CLASS -------+")
+    print("|                                 |")
+    print("|          1. Warrior             |")
+    print("|          2. Archer              |")
+    print("|          3. Mage                |")
+    print("|                                 |")
+    print("+---------------------------------+")
     while True:
         try:
             opt = int(input("> "))
@@ -58,27 +57,31 @@ def create_hero():
 def check_stats():
     hero_class = hero.class_type
 
-    print("\n+=-=-=-= Your Stats =-=-=-=+")
-    print(f"   {hero.name}, The {hero_class.class_name}")
-    print(f"   Level: {hero_class.level}")
+    print("\n+=-=-=-=+=-=-=+ YOUR STATS +=-=-=+=-=-=-=+")
+    print("|                                        |")
+    print(f"|   {hero.name}, The {hero_class.class_name}                       |")
+    print(f"|   Level: {hero_class.level}                             |")
     print(
-        f"   EXP ({((hero_class.level * 4) + hero_class.level // 2) - hero_class.xp} more to level up): {hero_class.xp}"
+        f"|   EXP ({((hero_class.level * 4) + hero_class.level // 2) - hero_class.xp} more to level up): {hero_class.xp}          |"
     )
-    print(f"   Health: {hero_class.health}")
-    print(f"   Damage: {hero_class.damage}")
-    print(f"   Armor: {hero_class.armor}")
-    print(f"   Gold: {hero.gold}")
-
+    print(f"|   Health: {hero_class.health}                           |")
+    print(f"|   Damage: {hero_class.damage}                            |")
+    print(f"|   Armor: {hero_class.armor}                             |")
+    print(f"|   Total Gold: {hero.gold}                        |") 
+    print("|                                        |")
+    print("+=-=-=-=+=-=-=-=+=-=-=-=+=-=-=-=+=-=-=-=-+")
 
 def city():
     # time.sleep(3)
-    print("\n+-------------- City of Setsugekka --------------+")
+    print("\n+-------------- CITY OF SETSUGEKKA --------------+")
+    print("|                                                |")
     print("|           1.  Fight                            |")
     print("|           2.  Shop                             |")
     print("|           3.  Tavern                           |")
     print("|           4.  Check your stats                 |")
     print("|                                                |")
     print("|           5.  Exit the game                    |")
+    print("|                                                |")
     print("+------------------------------------------------+")
     while True:
         try:
