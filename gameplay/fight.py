@@ -15,16 +15,18 @@ demi_gods_names = [
 
 # Enemy Characters
 random_name = random.randint(0, len(dark_elf_names) - 1)
-dark_elf = Enemy(dark_elf_names[random_name], "Dark Elf", Archer())
-demon = Enemy(demon_names[random_name], "Demon", Warrior())
-demi_god = Enemy(demi_gods_names[random_name], "Demi God", Mage())
+dark_elf = Enemy(dark_elf_names[random_name], "Dark Elf", Archer(10, 1, 1))
+demon = Enemy(demon_names[random_name], "Demon", Warrior(25, 6, 4))
+demi_god = Enemy(demi_gods_names[random_name], "Demi God", Mage(50, 12, 7))
 
 round_count = 1
 
+
 def monster_fight(hero, enemy_type):
     from gameplay.game import lobby
-    global round_count 
-    
+
+    global round_count
+
     # Character Initialization
     player = hero
     enemy = enemy_type
@@ -41,52 +43,60 @@ def monster_fight(hero, enemy_type):
     print("     1. Attack                ")
     print("     2. Special Attack        ")
     print("     3. Run                   ")
+    while True:
+        try:
+            move = int(input("\nWhat you gonna do? "))
+            match move:
+                case 1:
+                    print("\nYou choose to use a normal attack:")
+                    print("--------------------------------------")
+                    print(
+                        f"> Enemy takes {enemy_class.take_damage(player_damage)} points of damage."
+                    )
+                    if enemy_class.health > 0:
+                        print(
+                            f"> You take {player_class.take_damage(monster_damage)} of damage."
+                        )
+                    print(f"\n| Monster HP: {enemy_class.check_death()}")
+                    print(f"| Your HP: {player_class.check_death()}")
+                    # time.sleep(2)
 
-    move = int(input("\nWhat you gonna do? "))
+                    if enemy_class.health <= 0 and not player_class.health <= 0:
+                        gold_dropped = gold_drop(enemy)
+                        xp_dropped = xp_drop(enemy)
 
-    match move:
-        case 1:
-            print("\nYou choose to use a normal attack:")
-            print("--------------------------------------")
-            print(
-                f"> Enemy takes {enemy_class.take_damage(player_damage)} points of damage."
-            )
-            print(f"> You take {player_class.take_damage(monster_damage)} of damage.")
-            print(f"\n| Monster HP: {enemy_class.check_death()}")
-            print(f"| Your HP: {player_class.check_death()}")
-            time.sleep(2)
-            
-            if enemy_class.health <= 0:
-                gold_dropped = gold_drop(enemy)
-                xp_dropped = xp_drop(enemy)
+                        print("\n+---------------------------------------------+")
+                        print("|   You won the battle! Here's your reward:   |")
+                        print(
+                            f"|   You got: {player.gain_gold(gold_dropped)} gold and {player_class.gain_xp(xp_dropped)} experience          |"
+                        )
+                        print("+---------------------------------------------+")
 
-                print("\n+---------------------------------------------+")
-                print("|   You won the battle! Here's your reward:   |")
-                print(
-                f"|   You got: {player.gain_gold(gold_dropped)} gold and {player_class.gain_xp(xp_dropped)} experience          |"
-                )
-                print("+---------------------------------------------+")
+                        player_class.check_level_up()
+                        monster_hp_reset(enemy)
+                        round_count = 1
 
-                player_class.check_level_up()
-                monster_hp_reset(enemy)
-                round_count = 1
-                
-                print("\nGoing back to the lobby...")
-                lobby()
-                
-            elif player_class.health <= 0:
-                print("+----------------------+")
-                print("|      You Died!       |")
-                print("+----------------------+")
-                exit()
-            else: 
-                round_count += 1
-                monster_fight(player, enemy)
-        case 2:
-            pass
-        case 3:
-            monster_hp_reset(enemy)
-            lobby()
+                        print("\nGoing back to the lobby...")
+                        lobby()
+
+                    elif player_class.health <= 0:
+                        print("\n+----------------------+")
+                        print("|      You Died!       |")
+                        print("+----------------------+")
+                        exit()
+                    else:
+                        round_count += 1
+                        monster_fight(player, enemy)
+                case 2:
+                    pass
+                case 3:
+                    monster_hp_reset(enemy)
+                    print("\nGoing back to the city...")
+                    lobby()
+                case _:
+                    print("\nPlease, enter a valid movement!")
+        except ValueError:
+            print("\nWe only accept numbers, please enter a valid integer!")
 
 def gold_drop(enemy_type):
     if enemy_type.race == "Dark Elf":
@@ -95,7 +105,8 @@ def gold_drop(enemy_type):
         return enemy_type.drop_gold(12, 25)
     else:
         return enemy_type.drop_gold(30, 45)
-    
+
+
 def xp_drop(enemy_type):
     if enemy_type.race == "Dark Elf":
         return enemy_type.drop_xp(1, 4)
@@ -103,6 +114,7 @@ def xp_drop(enemy_type):
         return enemy_type.drop_xp(8, 14)
     else:
         return enemy_type.drop_gold(15, 22)
+
 
 def monster_hp_reset(enemy_type):
     if enemy_type.race == "Dark Elf":
@@ -112,9 +124,10 @@ def monster_hp_reset(enemy_type):
     else:
         return enemy_type.class_type.reset_hp()
 
+
 def fight(hero):
-    from gameplay.game import lobby
-    
+    from gameplay.game import city
+
     print("\n+--------------------------------+")
     print("|      Choose your opponent:     |")
     print("|                                |")
@@ -127,13 +140,22 @@ def fight(hero):
     print("|                                |")
     print("+--------------------------------+")
 
-    opt = int(input("Who is your opponent? "))
-    match opt:
-        case 1:
-            monster_fight(hero, dark_elf)
-        case 2:
-            monster_fight(hero, demon)
-        case 3:
-            monster_fight(hero, demi_god)
-        case 4:
-            lobby()
+    while True:
+        try:
+            opt = int(input("Who is your opponent? "))
+            match opt:
+                case 1:
+                    monster_fight(hero, dark_elf)
+                case 2:
+                    monster_fight(hero, demon)
+                case 3:
+                    monster_fight(hero, demi_god)
+                case 4:
+                    pass
+                case 5:
+                    print("\nGoing back to the city...")
+                    city()
+                case _:
+                    print("\nPlease, enter a valid option!\n")
+        except ValueError:
+            print("\nWe only accept numbers, please enter a integer!\n")
