@@ -1,14 +1,18 @@
 import math
+from items.weapons import *
+from items.armor import *
 
 
 class ClassType:
-    def __init__(self, health, damage, armor):
+    def __init__(self, health, weapon, armor):
         self.level = 1
         self.xp = 0
         self.health = health
         self.max_health = health
-        self.damage = damage
-        self.armor = armor
+        self.damage = weapon.damage
+        self.armor = armor.defense
+        self.weapon = weapon.name
+        self.armor = armor.name
 
     def __level_up(self):
         self.level += 1
@@ -44,44 +48,56 @@ class ClassType:
     def set_full_health(self):
         self.health = self.max_health
 
+    def set_weapon(self, weapon):
+        self.damage = weapon.damage
+        self.weapon = weapon.name
+    
+    def set_armor(self, armor):
+        self.damage = armor.defense
+        self.weapon = armor.name
+
 
 class Archer(ClassType):
-    def __init__(self, health=15, damage=3, armor=1):
-        super().__init__(health, damage, armor)
+    def __init__(self, health=15, weapon=Bow(), armor=Leather()):
+        super().__init__(health, weapon, armor)
         self.class_name = "Archer"
+        self.weapon_type = "Bow"
+        self.armor_type = "Leather"
         self.energy = 4
 
-    def rain_of_arrows(self):
+    def skill(self):
         self.energy -= 2
-        return self.damage * 2
+        return ["Rain of Arrows", self.damage * 2]
 
     def upgrade_energy(self):
         self.energy += 2
 
-
 class Warrior(ClassType):
-    def __init__(self, health=20, damage=1, armor=3):
-        super().__init__(health, damage, armor)
+    def __init__(self, health=20, weapon=Sword(), armor=Cloth()):
+        super().__init__(health, weapon, armor)
         self.class_name = "Warrior"
+        self.weapon_type = "Sword"
+        self.armor_type = "Chainmail"
         self.stamina = 4
 
-    def cyclone(self):
+    def skill(self):
         self.stamina -= 2
-        return self.damage * 3
+        return ["Cyclone", self.damage * 3]
 
     def upgrade_stamina(self):
         self.stamina += 4
 
-
 class Mage(ClassType):
-    def __init__(self, health=10, damage=2, armor=0):
-        super().__init__(health, damage, armor)
+    def __init__(self, health=10, weapon=Staff(), armor=Cloth()):
+        super().__init__(health, weapon, armor)
         self.class_name = "Warrior"
+        self.weapon_type = "Staff"
+        self.armor_type = "Cloth"
         self.mana = 2
 
-    def fireball(self):
+    def skill(self):
         self.mana -= 2
-        return self.damage * 4
+        return ["Fireball", self.damage * 4]
 
     def upgrade_mana(self):
         self.mana += 4

@@ -1,8 +1,10 @@
 from gameplay.game import create_hero, city
+from rpg.classes import *
 import time
-
+from items.armor import * 
 
 def main():
+
     print("\n\n+--------------- WELCOME TO MIDARE ---------------+")
     print("|                                                 |")
     print("|             1.  Create your hero                |")

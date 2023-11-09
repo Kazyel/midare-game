@@ -1,0 +1,13 @@
+def shop(hero):
+    print("\n+------------ WELCOME TO THE SHOP -------------+")
+    print("|                                                |")
+    print("|     Hey, wanderer! Wanna buy an upgrade?       |")      
+    print("|                                                |")
+    print("|             1. Swords                          |")
+    print("|             2. Staffs                          |")
+    print("|             3. Bows                            |")
+    print("|             4. Armors                          |")
+    print("|                                                |")
+    print("|             5. Back to outside                 |")
+    print("|                                                |")
+    print("+------------------------------------------------+")

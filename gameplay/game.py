@@ -58,7 +58,6 @@ def check_stats():
 
     print("\n+=-=-=-=+=-=-=+ YOUR STATS +=-=-=+=-=-=-=+")
     print("|                                        |")
-    print(f"|   {hero.name}, The {hero_class.class_name}                       |")
     print(f"|   Level: {hero_class.level}                             |")
     print(
         f"|   EXP ({((hero_class.level * 4) + hero_class.level // 2) - hero_class.xp} more to level up): {hero_class.xp}          |"
