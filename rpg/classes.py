@@ -11,8 +11,8 @@ class ClassType:
         self.max_health = health
         self.damage = weapon.damage
         self.armor = armor.defense
-        self.weapon = weapon.name
-        self.armor = armor.name
+        self.weapon_name = weapon.name
+        self.armor_name = armor.name
 
     def __level_up(self):
         self.level += 1
@@ -73,7 +73,7 @@ class Archer(ClassType):
         self.energy += 2
 
 class Warrior(ClassType):
-    def __init__(self, health=20, weapon=Sword(), armor=Cloth()):
+    def __init__(self, health=20, weapon=Sword(), armor=Chainmail()):
         super().__init__(health, weapon, armor)
         self.class_name = "Warrior"
         self.weapon_type = "Sword"
@@ -90,7 +90,7 @@ class Warrior(ClassType):
 class Mage(ClassType):
     def __init__(self, health=10, weapon=Staff(), armor=Cloth()):
         super().__init__(health, weapon, armor)
-        self.class_name = "Warrior"
+        self.class_name = "Mage"
         self.weapon_type = "Staff"
         self.armor_type = "Cloth"
         self.mana = 2

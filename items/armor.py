@@ -4,7 +4,7 @@ class Armor:
         self.name = name
         
 class Cloth(Armor):
-    def __init__(self, name="Cloth Armor", defense=3):
+    def __init__(self, name="Cloth Armor", defense=0):
         super().__init__(name, defense)
 
 class Chainmail(Armor):

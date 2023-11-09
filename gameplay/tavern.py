@@ -4,7 +4,7 @@ from gameplay.game import city
 def tavern(hero):
     player = hero.class_type
     gold = hero.gold
-    gold_tax = int((hero.class_type.level * 3) // 1.5)
+    gold_tax = int((hero.gold) // 2.75)
 
     print("\n+------------ WELCOME TO THE TAVERN -------------+")
     print("|                                                |")
@@ -38,7 +38,7 @@ def tavern(hero):
                                 case "y":
                                     if (
                                         player.health < player.max_health
-                                        and gold > gold_tax
+                                        and gold >= gold_tax
                                     ):
                                         hero.lose_gold(gold_tax)
                                         player.set_full_health()

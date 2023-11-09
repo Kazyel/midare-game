@@ -46,7 +46,7 @@ def monster_fight(hero, enemy_type):
 
         print(f"\n+---------- YOUR STATS -----------+")
         print(
-            f"|     HP: {player_class.health} | DMG: {player_damage} | ARMOR: {player_class.armor}  |"
+            f"|     HP: {player_class.health} | DMG: {player_damage} | ARMOR: {player_class.armor}   |"
         )
         print("+------------- MOVES -------------+")
         print("|                                 |")
