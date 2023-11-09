@@ -4,22 +4,20 @@ from items.armor import *
 
 
 class ClassType:
+
     def __init__(self, health, weapon, armor):
         self.level = 1
         self.xp = 0
         self.health = health
         self.max_health = health
-        self.damage = weapon.damage
+        self.base_damage = weapon.damage
+        self.add_damage = 0
         self.armor = armor.defense
         self.weapon_name = weapon.name
         self.armor_name = armor.name
 
-    def __level_up(self):
-        self.level += 1
-        self.armor += 1
-        self.damage += 1
-        self.health += 2
-        self.max_health += 2
+    def get_damage(self):
+        return self.add_damage + self.base_damage
 
     def take_damage(self, dmg):
         damage_taken = math.ceil(dmg - (self.armor / 2))
@@ -29,7 +27,7 @@ class ClassType:
         return 0
 
     def deal_damage(self, target):
-        damage_dealt = math.ceil(self.damage - (target.armor / 2))
+        damage_dealt = math.ceil((self.get_damage()) - (target.armor / 2))
         if damage_dealt >= 0:
             target.health -= damage_dealt
             return damage_dealt
@@ -45,6 +43,12 @@ class ClassType:
         self.xp += xp_gain
         return xp_gain
 
+    def __level_up(self):
+        self.level += 1
+        self.add_damage += 1
+        self.health += 2
+        self.max_health += 2
+
     def check_level_up(self):
         actual_xp = self.xp
         if actual_xp >= ((self.level * 4) + self.level // 2):
@@ -57,12 +61,15 @@ class ClassType:
         self.health = self.max_health
 
     def set_weapon(self, weapon):
-        self.damage = weapon.damage
-        self.weapon = weapon.name
+        self.base_damage = weapon.damage
+        self.weapon_name = weapon.name
 
     def set_armor(self, armor):
-        self.damage = armor.defense
-        self.weapon = armor.name
+        self.armor = armor.defense
+        self.armor_name = armor.name
+
+    def skill(self, skill_name, skill_dmg):
+        return [skill_name, skill_dmg]
 
 
 class Archer(ClassType):
@@ -75,10 +82,7 @@ class Archer(ClassType):
 
     def skill(self):
         self.energy -= 2
-        return ["Rain of Arrows", self.damage * 2]
-
-    def upgrade_energy(self):
-        self.energy += 2
+        return super().skill("Rain of Arrows", self.damage * 2)
 
 
 class Warrior(ClassType):
@@ -91,11 +95,7 @@ class Warrior(ClassType):
 
     def skill(self):
         self.stamina -= 2
-        return ["Cyclone", self.damage * 3]
-
-    def upgrade_stamina(self):
-        self.stamina += 4
-
+        return super().skill("Cyclone", self.damage * 2)
 
 class Mage(ClassType):
     def __init__(self, health=10, weapon=Staff(), armor=Cloth()):
@@ -107,7 +107,4 @@ class Mage(ClassType):
 
     def skill(self):
         self.mana -= 2
-        return ["Fireball", self.damage * 4]
-
-    def upgrade_mana(self):
-        self.mana += 4
+        return super().skill("Fireball", self.damage * 4)

@@ -63,8 +63,8 @@ def check_stats():
         f"   EXP ({((hero_class.level * 4) + hero_class.level // 2) - hero_class.xp} more to level up): {hero_class.xp}          "
     )
     print(f"   Health: {hero_class.health}                            ")
-    print(f"   Damage: {hero_class.damage}                            ")
-    print(f"   Armor: {hero_class.armor}                             ")
+    print(f"   Damage: {hero_class.get_damage()} - {hero_class.weapon_name}                            ")
+    print(f"   Armor: {hero_class.armor} - {hero_class.armor_name}                             ")
     print(f"   Total Gold: {hero.gold}                        ")
     print("                                        ")
     print("+=-=-=-=+=-=-=-=+=-=-=-=+=-=-=-=+=-=-=-=-+")
@@ -72,6 +72,7 @@ def check_stats():
 
 def city():
     from gameplay.tavern import tavern
+    from gameplay.shop import shop
 
     # time.sleep(3)
     print("\n+-------------- CITY OF SETSUGEKKA --------------+")
@@ -91,7 +92,7 @@ def city():
                 case 1:
                     fight(hero)
                 case 2:
-                    pass
+                    shop(hero)
                 case 3:
                     tavern(hero)
                 case 4:

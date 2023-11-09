@@ -1,10 +1,16 @@
 from gameplay.game import create_hero, city
 from rpg.classes import *
 import time
-from items.armor import * 
+from items.armor import *
+
 
 def main():
-
+    
+    new_war = Warrior(20)
+    new_war.set_weapon(Sword("Iron Sword", 5))
+    print(new_war.base_damage)
+    print(new_war.add_damage)
+    
     print("\n\n+--------------- WELCOME TO MIDARE ---------------+")
     print("|                                                 |")
     print("|             1.  Create your hero                |")

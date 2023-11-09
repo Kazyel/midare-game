@@ -26,7 +26,7 @@ def monster_fight(hero, enemy_type):
     from gameplay.game import city
 
     hero_class = hero.class_type
-    hero_damage = hero_class.damage
+    hero_damage = hero_class.get_damage()
     enemy = enemy_type
     enemy_damage = enemy.damage
 
@@ -89,9 +89,9 @@ def monster_fight(hero, enemy_type):
                             print(
                                 "\n+------------------------------------------------+"
                             )
-                            print("|   You won the battle! Here's your reward:      |")
+                            print("    You won the battle! Here's your reward:      ")
                             print(
-                                f"|   You got: {hero.gain_gold(gold_dropped)} gold and {hero_class.gain_xp(xp_dropped)} points of experience   |"
+                                f"    You got: {hero.gain_gold(gold_dropped)} gold and {hero_class.gain_xp(xp_dropped)} points of experience   "
                             )
                             print(
                                 "+------------------------------------------------+\n"

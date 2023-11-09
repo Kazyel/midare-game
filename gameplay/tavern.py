@@ -20,14 +20,14 @@ def tavern(hero):
                 
                 case 1:
                     print("\n+-------------- TAVERN KEEPER --------------+")
-                    print("|                                           |")
-                    print("|      Hello, wanderer! Do you want to      |")
-                    print("|      stay for the night? I can do a       |")
-                    print(f"|      generous price for you!              |")
-                    print("|                                           |")
-                    print(f"|            It will be {gold_tax} gold.             |")
-                    print(f"|             You have {gold} gold.              |")
-                    print("|                                           |")
+                    print("                                           ")
+                    print("       Hello, wanderer! Do you want to      ")
+                    print("       stay for the night? I can do a       ")
+                    print(f"       generous price for you!              ")
+                    print("                                          ")
+                    print(f"             It will be {gold_tax} gold.             ")
+                    print(f"              You have {gold} gold.              ")
+                    print("                                           ")
                     print("+-------------------------------------------+")
 
                     while True:
