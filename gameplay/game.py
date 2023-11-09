@@ -57,10 +57,10 @@ def check_stats():
     hero_class = hero.class_type
 
     print("\n+=-=-=-=+=-=-=+ YOUR STATS +=-=-=+=-=-=-=+")
-    print("                                        |")
+    print("                                        ")
     print(f"   Level: {hero_class.level}                             ")
     print(
-        f"|   EXP ({((hero_class.level * 4) + hero_class.level // 2) - hero_class.xp} more to level up): {hero_class.xp}          |"
+        f"   EXP ({((hero_class.level * 4) + hero_class.level // 2) - hero_class.xp} more to level up): {hero_class.xp}          "
     )
     print(f"   Health: {hero_class.health}                            ")
     print(f"   Damage: {hero_class.damage}                            ")

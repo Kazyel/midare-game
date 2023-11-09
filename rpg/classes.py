@@ -28,8 +28,16 @@ class ClassType:
             return damage_taken
         return 0
 
+    def deal_damage(self, target):
+        damage_dealt = math.ceil(self.damage - (target.armor / 2))
+        if damage_dealt >= 0:
+            target.health -= damage_dealt
+            return damage_dealt
+        return 0
+
     def death_check(self):
         if self.health <= 0:
+            self.health = 0
             return "Dead"
         return self.health
 
@@ -51,7 +59,7 @@ class ClassType:
     def set_weapon(self, weapon):
         self.damage = weapon.damage
         self.weapon = weapon.name
-    
+
     def set_armor(self, armor):
         self.damage = armor.defense
         self.weapon = armor.name
@@ -72,6 +80,7 @@ class Archer(ClassType):
     def upgrade_energy(self):
         self.energy += 2
 
+
 class Warrior(ClassType):
     def __init__(self, health=20, weapon=Sword(), armor=Chainmail()):
         super().__init__(health, weapon, armor)
@@ -86,6 +95,7 @@ class Warrior(ClassType):
 
     def upgrade_stamina(self):
         self.stamina += 4
+
 
 class Mage(ClassType):
     def __init__(self, health=10, weapon=Staff(), armor=Cloth()):

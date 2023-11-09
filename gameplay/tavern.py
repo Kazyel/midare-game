@@ -2,7 +2,7 @@ from gameplay.game import city
 
 
 def tavern(hero):
-    player = hero.class_type
+    hero_class = hero.class_type
     gold = hero.gold
     gold_tax = int((hero.gold) // 2.75)
 
@@ -37,11 +37,11 @@ def tavern(hero):
                             match choice:
                                 case "y":
                                     if (
-                                        player.health < player.max_health
+                                        hero_class.health < hero_class.max_health
                                         and gold >= gold_tax
                                     ):
                                         hero.lose_gold(gold_tax)
-                                        player.set_full_health()
+                                        hero_class.set_full_health()
                                         print(
                                             f"\nYou paid {gold_tax} gold for the night and were healed to full life.\n"
                                         )
@@ -50,7 +50,7 @@ def tavern(hero):
                                         print(
                                             "\nYou don't have enough money for the night.\n"
                                         )
-                                    elif player.health == player.max_health:
+                                    elif hero_class.health == hero_class.max_health:
                                         print("\nYou are already at full life.\n")
                                         tavern(hero)
                                 case "n":
