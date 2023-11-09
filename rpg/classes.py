@@ -1,26 +1,29 @@
 import math
+
+
 class ClassType:
     def __init__(self, health, damage, armor):
         self.level = 1
         self.xp = 0
         self.health = health
+        self.max_health = health
         self.damage = damage
         self.armor = armor
-        self.__base_health = health
 
     def __level_up(self):
         self.level += 1
         self.armor += 1
         self.damage += 1
         self.health += 2
+        self.max_health += 2
 
     def take_damage(self, dmg):
         damage_taken = math.ceil(dmg - (self.armor / 2))
-        if(damage_taken >= 0):
+        if damage_taken >= 0:
             self.health -= damage_taken
             return damage_taken
         return 0
-        
+
     def death_check(self):
         if self.health <= 0:
             return "Dead"
@@ -34,15 +37,12 @@ class ClassType:
         actual_xp = self.xp
         if actual_xp >= ((self.level * 4) + self.level // 2):
             self.__level_up()
-            self.__reset_xp()
+            self.xp = 0
         else:
             return False
 
-    def __reset_xp(self):
-        self.xp = 0
-
-    def reset_hp(self):
-        self.health = self.__base_health
+    def set_full_health(self):
+        self.health = self.max_health
 
 
 class Archer(ClassType):

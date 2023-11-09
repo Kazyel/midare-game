@@ -24,25 +24,30 @@ round_count = 1
 
 def monster_fight(hero, enemy_type):
     from gameplay.game import city
+
     player = hero
     enemy = enemy_type
 
-    monster_class = enemy.class_type
+    enemy_class = enemy.class_type
     player_class = player.class_type
 
     player_damage = player_class.damage
-    monster_damage = monster_class.damage
+    enemy_damage = enemy_class.damage
 
     print("\n+--------- FIGHT STARTED ---------+")
     print(f"\n| {enemy.race} {enemy.name}")
-    print(f"| HP: {monster_class.health} \n| DMG: {monster_class.damage} \n| ARMOR: {monster_class.armor}")    
-    
+    print(
+        f"| HP: {enemy_class.health} \n| DMG: {enemy_class.damage} \n| ARMOR: {enemy_class.armor}"
+    )
+
     # Attack Menu
     def fight_moves():
         global round_count
-        
+
         print(f"\n+---------- YOUR STATS -----------+")
-        print(f"|     HP: {player_class.health} | DMG: {player_damage} | ARMOR: {player_class.armor}  |")
+        print(
+            f"|     HP: {player_class.health} | DMG: {player_damage} | ARMOR: {player_class.armor}  |"
+        )
         print("+------------- MOVES -------------+")
         print("|                                 |")
         print("|        1. Attack                |")
@@ -50,7 +55,7 @@ def monster_fight(hero, enemy_type):
         print("|        3. Run                   |")
         print("|                                 |")
         print("+---------------------------------+")
-        
+
         while True:
             try:
                 move = int(input("What you gonna do? "))
@@ -58,28 +63,38 @@ def monster_fight(hero, enemy_type):
                     case 1:
                         print("\n\n+------------- BATTLE LOG -------------+")
                         print("You use a normal attack:")
-                        if(monster_class.take_damage(player_damage) == 1):
-                            print(f"-> {enemy.name} takes {monster_class.take_damage(player_damage)} point of damage.")
+                        if enemy_class.take_damage(player_damage) == 1:
+                            print(
+                                f"-> {enemy.name} takes {enemy_class.take_damage(player_damage)} point of damage."
+                            )
                         else:
-                            print(f"-> {enemy.name} takes {monster_class.take_damage(player_damage)} points of damage.")
-            
+                            print(
+                                f"-> {enemy.name} takes {enemy_class.take_damage(player_damage)} points of damage."
+                            )
+
                         print(f"\n{enemy.name} attacks you:")
-                        if monster_class.health > 0:
-                            if(player_class.take_damage(monster_damage) == 1):
-                                print(f"-> You take {player_class.take_damage(monster_damage)} point of damage.")
+                        if enemy_class.health > 0:
+                            if player_class.take_damage(enemy_damage) == 1:
+                                print(
+                                    f"-> You take {player_class.take_damage(enemy_damage)} point of damage."
+                                )
                             else:
-                                print(f"-> You take {player_class.take_damage(monster_damage)} points of damage.")
-                        
-                        print(f"\n| {enemy.name} HP: {monster_class.death_check()}")
+                                print(
+                                    f"-> You take {player_class.take_damage(enemy_damage)} points of damage."
+                                )
+
+                        print(f"\n| {enemy.name} HP: {enemy_class.death_check()}")
                         print(f"| Your HP: {player_class.death_check()}")
                         print("+--------------------------------------+\n")
                         # time.sleep(2)
 
-                        if monster_class.health <= 0 and not player_class.health <= 0:
+                        if enemy_class.health <= 0 and not player_class.health <= 0:
                             gold_dropped = gold_drop(enemy)
                             xp_dropped = xp_drop(enemy)
 
-                            print("\n+------------------------------------------------+")
+                            print(
+                                "\n+------------------------------------------------+"
+                            )
                             print("|   You won the battle! Here's your reward:      |")
                             print(
                                 f"|   You got: {player.gain_gold(gold_dropped)} gold and {player_class.gain_xp(xp_dropped)} points of experience   |"
@@ -87,7 +102,7 @@ def monster_fight(hero, enemy_type):
                             print("+------------------------------------------------+")
 
                             player_class.check_level_up()
-                            monster_class.reset_hp()
+                            enemy_class.set_full_health()
                             round_count = 1
 
                             print("\nGoing back to the city...")
@@ -104,7 +119,7 @@ def monster_fight(hero, enemy_type):
                     case 2:
                         pass
                     case 3:
-                        monster_class.reset_hp()
+                        enemy_class.set_full_health()
                         print(f"\nYou cowardly run away from {enemy.name},")
                         print("And returns back to the city...")
                         city()
@@ -112,6 +127,7 @@ def monster_fight(hero, enemy_type):
                         print("\nPlease, enter a valid movement!\n")
             except ValueError:
                 print("\nWe only accept numbers, please enter a valid integer!\n")
+
     fight_moves()
 
 
@@ -126,11 +142,11 @@ def gold_drop(enemy_type):
 
 def xp_drop(enemy_type):
     if enemy_type.race == "Dark Elf":
-        return enemy_type.drop_xp(2, 4)
+        return enemy_type.drop_xp(1, 4)
     elif enemy_type.race == "Demon":
-        return enemy_type.drop_xp(8, 14)
+        return enemy_type.drop_xp(7, 14)
     else:
-        return enemy_type.drop_gold(15, 22)
+        return enemy_type.drop_gold(13, 22)
 
 
 def fight(hero):

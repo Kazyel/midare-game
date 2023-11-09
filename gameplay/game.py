@@ -19,8 +19,8 @@ def create_hero():
 
     print("\n\n        CREATING A NEW HERO")
     print("   +---------------------------+")
-    name = input("        Enter your name: ")
-    race = input("        Enter your race: ")
+    name = input("       Enter your name: ")
+    race = input("       Enter your race: ")
 
     print("\n+------- CHOOSE YOUR CLASS -------+")
     print("|                                 |")
@@ -53,7 +53,6 @@ def create_hero():
             print("\nWe only accept numbers, please enter a integer!\n")
 
 
-
 def check_stats():
     hero_class = hero.class_type
 
@@ -67,11 +66,14 @@ def check_stats():
     print(f"|   Health: {hero_class.health}                           |")
     print(f"|   Damage: {hero_class.damage}                            |")
     print(f"|   Armor: {hero_class.armor}                             |")
-    print(f"|   Total Gold: {hero.gold}                        |") 
+    print(f"|   Total Gold: {hero.gold}                        |")
     print("|                                        |")
     print("+=-=-=-=+=-=-=-=+=-=-=-=+=-=-=-=+=-=-=-=-+")
 
+
 def city():
+    from gameplay.tavern import tavern
+
     # time.sleep(3)
     print("\n+-------------- CITY OF SETSUGEKKA --------------+")
     print("|                                                |")
@@ -92,7 +94,7 @@ def city():
                 case 2:
                     pass
                 case 3:
-                    pass
+                    tavern(hero)
                 case 4:
                     check_stats()
                     city()
